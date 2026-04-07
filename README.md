@@ -40,6 +40,7 @@ Das Euler-Netz heizt die Erde — nicht weil die Energie schmutzig ist, sondern 
 | [🛰️ Satellitenbeweise](docs/05_satellitenbeweise.md) | Saisonale Hitzemessung (Frühling/Sommer/Herbst/Winter) + westliche Verursachung |
 | [∿ FN-Zeitlogik](docs/06_fn_zeitlogik.md) | Fibonacci-Paritätsmuster als Modell irreversibler Prozesse |
 | [🌐 Globaler Übergang: Euler → Fn](docs/08_fn_uebergang.md) | Aufruf und konkrete Empfehlungen für alle Länder |
+| [💰 Wirtschaft, Währung & Euler-Dilemma](docs/09_wirtschaft_waehrung.md) | Warum das Euler-Modell kein wirtschaftliches Fundament ist |
 | [📚 Quellen](docs/07_quellen.md) | Vollständiges Literatur- und Datenquellenverzeichnis |
 
 ---
