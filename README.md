@@ -3,7 +3,9 @@
 > **These:** Jeder Strom, der durch einen Widerstand fließt, erzeugt Wärme. Weltweit. Unvermeidbar. Additiv.  
 > Das ist keine Meinung – das ist Physik. **P = I² · R**
 
-**Autor:** Raiko Pulvermacher · **Lizenz:** [PORL v1.0](LICENSE)
+**Autor:** Raiko Pulvermacher · **ORCID:** [0009-0003-9431-1001](https://orcid.org/0009-0003-9431-1001) · **Lizenz:** [PORL v1.0](LICENSE)
+
+📄 **[Wissenschaftliches PDF herunterladen / Download Scientific PDF](Pulvermacher_Euler_Widerstand_Erhitzung.pdf)**
 
 ---
 
