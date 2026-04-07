@@ -145,6 +145,59 @@ def hauptrechnung():
     print(f"  Lokale Wärmeflussdichte:  {urban_flux:.2f} W/m²  ← Urban Heat Island Beitrag")
     print()
 
+    # --- Orts-Entropie-Asymmetrie: Leitungslängen-Analyse ---
+    print("=" * 60)
+    print("ORTS-ENTROPIE-ASYMMETRIE: LEITUNG ALS PLANETARER HEIZSTAB")
+    print("=" * 60)
+    print("  These: Windenergie ist kein Nullsummenspiel.")
+    print("  Entnahme (Küste/Meer, thermisch neutral)")
+    print("  → I²·R über tausende km Kabel → Wärme auf gesamter Strecke")
+    print("  → Emission (Megacity/Datenzentrum, thermisch kritisch)")
+    print()
+
+    # Spezifischer Widerstand Kupfer bei 20°C [Ohm·m]
+    rho_kupfer = 1.72e-8
+    # Typischer Leitungsquerschnitt Hochspannungsleitung [m²] (~240 mm²)
+    querschnitt_m2 = 240e-6
+
+    # Szenario-Vergleich: lokale vs. globale Einspeisung
+    szenarien = [
+        ("Lokal  (Kraftwerk  50 km vom Verbraucher)", 50_000),
+        ("Mittel (Offshore  500 km Küste→Stadt)    ", 500_000),
+        ("Global (Fernleitung 2000 km, z.B. Nordsee→Süd-DE)", 2_000_000),
+        ("Makro  (Interkontinental 5000 km)         ", 5_000_000),
+    ]
+
+    # Typischer Nennstrom einer 380-kV-Hochspannungsleitung [A]
+    strom_A = 1_000
+
+    print(f"  Annahme: I = {strom_A} A (typische 380-kV-Leitung), "
+          f"Querschnitt = {querschnitt_m2*1e6:.0f} mm²")
+    print()
+    print(f"  {'Szenario':<52} {'R [Ω]':>8}  {'P_Verlust [kW]':>16}  {'P_Verlust [MW]':>15}")
+    print(f"  {'-'*52} {'-'*8}  {'-'*16}  {'-'*15}")
+    for name, laenge_m in szenarien:
+        R = rho_kupfer * laenge_m / querschnitt_m2
+        P_W = strom_A ** 2 * R
+        print(f"  {name}  {R:>8.2f}  {P_W/1e3:>16.1f}  {P_W/1e6:>15.3f}")
+
+    print()
+    print("  → Gleicher Strom, gleiche Quelle, aber 100× mehr Leitungslänge")
+    print("    = 100× mehr Joulesche Wärme, verteilt auf die gesamte Strecke.")
+    print("  → Diese Wärme entsteht NICHT am Entnahmeort (Nordsee),")
+    print("    sondern entlang der Leitung und am Zielort (Megacity).")
+    print("  → Das ist der physikalische Beweis gegen das 'Nullsummenspiel'.")
+    print()
+
+    # Entropie-Argument
+    print("  ENTROPIE-FALLE:")
+    print("  Windenergie  →  geordnet (niederentropisch, gerichtete Strömung)")
+    print("  I²·R-Verlust →  Abwärme  (hochentropisch, thermische Agitation)")
+    print("  Zweiter Hauptsatz: dieser Prozess ist irreversibel.")
+    print("  Jede neue Leitungslänge beschleunigt die Entropieproduktion")
+    print("  des Systems Erde – unabhängig von der Energiequelle.")
+    print()
+
     # --- FN-Zeitlogik ---
     print("=" * 60)
     print("FN-ZEITLOGIK: Asymmetrie → Symmetrie → Weiter")
