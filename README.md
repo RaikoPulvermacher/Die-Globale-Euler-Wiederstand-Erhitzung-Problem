@@ -106,6 +106,15 @@ Ausgabe: Berechnete globale Joule-Wärme in EJ/Jahr, Vergleich mit anderen Wärm
 
 ---
 
+## Lizenz / License
+
+Dieses Werk steht unter der **Pulvermacher Open Research License (PORL) v1.0**.  
+Zenodo: https://doi.org/10.5281/zenodo.18757232  
+GitHub: https://github.com/RaikoPulvermacher/PORL/tree/v.1.0  
+Siehe [`LICENSE`](LICENSE) für den vollständigen Lizenztext.
+
+---
+
 ## Quellen und Grundlagen
 
 - Euler, L. (1736): *Solutio problematis ad geometriam situs pertinentis* – Netzwerktheorie
