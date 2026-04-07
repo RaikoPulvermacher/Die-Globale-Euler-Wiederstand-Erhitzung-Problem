@@ -87,6 +87,67 @@ Die Antwort:
 
 ---
 
+## Die Orts-Entropie-Asymmetrie: Warum "erneuerbar" kein Nullsummenspiel ist
+
+> **These (Raiko Pulvermacher):** Wir entziehen lokal kinetische Energie (z. B. dem Wind der Nordsee), die aber global ist – während wir lokal Wärme erzeugen **und** global für Erhitzung sorgen, weil der Wind nicht nur die Umwandlungsenergie lokal aufnimmt, sondern die neue Leitung global wirkt.
+
+Das klassische Gegenargument lautet: "Windenergie ist ein Nullsummenspiel – wir entziehen der Atmosphäre kinetische Energie und geben sie an anderer Stelle als Wärme zurück." Diese Argumentation scheitert in drei Punkten:
+
+### 1. Ortsverschiebung (Spatial Decoupling)
+
+| Ort | Vorgang | Thermische Wirkung |
+|---|---|---|
+| Nordsee / Küste | Windturbine entzieht Strömungsenergie | Lokal: Abkühlung der Strömung |
+| Tausende km Leitung | I²·R entlang Kupfer/Aluminium | Wärme in thermisch belasteten Zwischenregionen |
+| Megacity / Datenzentrum | Endnutzung + Restwiderstände | Wärme genau dort, wo Urban Heat Island schon existiert |
+
+Die Energie wird an einem thermisch neutralen Ort entnommen und an einem thermisch kritischen Ort emittiert.  
+Das ist keine Umverteilung – das ist **aktive Umverteilung in Problemzonen**.
+
+### 2. Die Leitung als planetarer Heizstab
+
+Das Kabel selbst ist kein passiver Kanal – es ist ein gestreckte Wärmequelle:
+
+```
+P_Leitung = I² · R_gesamt   mit   R_gesamt = ρ · L / A
+```
+
+- `L` = Leitungslänge  
+- `ρ` = spezifischer Widerstand des Leitermaterials  
+- `A` = Querschnittsfläche  
+
+Je weiter die Energie transportiert wird (globaler Netzausbau = größeres `L`), desto höher ist `R_gesamt`, desto mehr Joulesche Wärme entsteht **entlang der gesamten Strecke** – nicht nur am Zielort.  
+**Die "grüne" Lösung von heute (massiver Netzausbau) ist physikalisch der Einbau eines weltumspannenden Tauchsieders.**
+
+### 3. Die Entropie-Falle (Entropy Trap)
+
+Windenergie ist **geordnete, niederentropische Energie** (gerichtete Luftbewegung).  
+Joulesche Wärme durch Leitungswiderstand ist **ungeordnete, hochentropische Energie** (thermische Agitation).
+
+```
+S_Wind (niedrig) → Leitungstransport → S_Abwärme (hoch)
+```
+
+Dieser Prozess ist **irreversibel** (Zweiter Hauptsatz). Wir beschleunigen den Wärmetod des Systems Erde nicht durch die Quelle, sondern durch die schiere Länge und Komplexität der Netzinfrastruktur.  
+CO₂-Modelle erfassen diesen Entropie-Anstieg durch Infrastruktur nicht – die Globale Euler-Widerstand-Erhitzung schon.
+
+### Zusammenfassung der Asymmetrie
+
+```
+KLASSISCHES BILD:   Entnahme(Wind) ←→ Abgabe(Wärme)  =  Nullsumme ✗
+                     (gleicher Ort, gleiche Thermodynamik)
+
+REALES BILD:        Entnahme(Nordsee, thermisch neutral)
+                         ↓  80 Mio. km Kabel  →  I²·R  →  Wärme auf Strecke
+                    Abgabe(Megacity, thermisch kritisch)   ≠  Nullsumme ✓
+                         +  Entropieerhöhung (irreversibel)
+                         +  Urban Heat Island Verstärkung
+```
+
+Das Modell (`euler_heat_model.py`) enthält jetzt eine explizite Leitungslängen-Analyse, die diesen Effekt quantifiziert.
+
+---
+
 ## FN-Zeitlogik: Asymmetrie als Treiber
 
 Das Fibonacci-Paritätsmuster (`UUG` – Ungerade, Ungerade, Gerade) zeigt: Asymmetrie ist der Normalzustand von Prozessen.  
