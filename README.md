@@ -106,10 +106,48 @@ Ausgabe: Berechnete globale Joule-Wärme in EJ/Jahr, Vergleich mit anderen Wärm
 
 ---
 
+## Forschungskontext und Verzweigung
+
+Diese Arbeit ist **kein isoliertes Projekt**. Sie ist eine direkte Verzweigung aus dem Forschungsbaum von Raiko Pulvermacher und baut auf folgenden Vorarbeiten auf:
+
+```
+Tensor der Realitäten (TdR)  ←  Hauptwerk / Fundament
+│
+│   Bottom-Up-Naturbeschreibung: Energie, Zeit, Materie, Gravitation
+│   als untrennbar gekoppeltes Ganzes. Keine Durchschnittsmodelle.
+│   DOI: https://doi.org/10.5281/zenodo.18727529
+│   GitHub: https://github.com/RaikoPulvermacher/Tensor-Realit-ten
+│
+└──► Energie-Revolution  ←  Direkte Vorgängerarbeit
+     │
+     │   Euler-Mathematik auf diskrete Systeme angewandt erzeugt
+     │   89% Verluste als Abwärme. Fn-Prozessstruktur als Lösung.
+     │   DOI: https://doi.org/10.5281/zenodo.18778354
+     │   GitHub: https://github.com/RaikoPulvermacher/Energie-Revolution-/tree/v1.0
+     │
+     └──► Diese Arbeit: Globale Euler-Widerstand-Erhitzung
+          │
+          │   Messbarer Ausdruck des Problems: Das Euler-Netzwerk
+          │   (I²·R) als globale, additive Wärmequelle. P = I²·R ist
+          │   nicht nur eine Formel – es ist ein planetares Phänomen.
+          │
+          └──► Nächste Schritte: Fn-Logik als Lösung
+               GitHub: https://github.com/RaikoPulvermacher/Fn-Logik-Mathematik
+               GitHub: https://github.com/RaikoPulvermacher/Energie-Revolution-
+```
+
+**Der rote Faden:**  
+TdR erkennt, dass die Natur additiv und nicht separierbar ist →  
+Energie-Revolution zeigt, dass Euler-Mathematik auf diskrete Systeme Verluste erzeugt →  
+Diese Arbeit quantifiziert genau diese Verluste als globale Abwärme (I²·R) →  
+Die Fn-Logik zeigt den Ausweg.
+
+---
+
 ## Lizenz / License
 
 Dieses Werk steht unter der **Pulvermacher Open Research License (PORL) v1.0**.  
-Zenodo: https://doi.org/10.5281/zenodo.18757232  
+Zenodo: https://doi.org/10.5281/zenodo.19100374  
 GitHub: https://github.com/RaikoPulvermacher/PORL/tree/v.1.0  
 Siehe [`LICENSE`](LICENSE) für den vollständigen Lizenztext.
 
