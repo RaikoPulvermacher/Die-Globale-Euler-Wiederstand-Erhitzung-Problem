@@ -3,206 +3,61 @@
 > **These:** Jeder Strom, der durch einen Widerstand fließt, erzeugt Wärme. Weltweit. Unvermeidbar. Additiv.  
 > Das ist keine Meinung – das ist Physik. **P = I² · R**
 
----
-
-## Das Euler-Prinzip: Netzwerke und Verluste
-
-Leonhard Euler legte die Grundlage der Netzwerktheorie (Graphentheorie, 1736). Ein globales Stromnetz ist ein Eulersches Netzwerk: Millionen von Knoten (Trafos, Schalter, Server) und Kanten (Kabel, Leitungen). In jedem dieser Elemente gilt:
-
-```
-P_Verlust = I² · R
-```
-
-Die **Summe aller Verluste** im globalen Netzwerk ist die **direkt erzeugte Abwärme an der Erdoberfläche**.
+**Autor:** Raiko Pulvermacher · **Lizenz:** [PORL v1.0](LICENSE)
 
 ---
 
-## Die drei physikalischen Beweise
+## Kurzfassung
 
-### 1. Der Zweite Hauptsatz der Thermodynamik
+Das globale Stromnetz ist ein Eulersches Netzwerk aus ~80 Millionen km Kabel und ~1 Milliarde Transformatoren. In jedem Element gilt `P = I² · R`. Die Summe aller Verluste ergibt eine **additive, physikalisch unumkehrbare Wärmequelle direkt an der Erdoberfläche** von ca. **~11 350 TWh/Jahr (~40,9 EJ/Jahr)** — nicht erfasst in CO₂-zentrierten Klimamodellen.
 
-Jede Energieumwandlung erzeugt Entropie. Entropie manifestiert sich als Wärme.
-
-- Es gibt keinen verlustfreien Energietransport (η < 1 immer)
-- Windenergie → Strom → Transport → Nutzung: **jede Stufe heizt**
-- Auch "grüne" Energie erzeugt beim Transport und bei der Nutzung Joulesche Wärme
-- Diese Wärme ist **nicht speicherbar, nicht kompensierbar** – sie ist lokal vorhanden
-
-### 2. Das Ohmsche Gesetz der globalen Infrastruktur
-
-```
-P = I² · R        (Joulesche Erwärmung)
-Q = P · t         (Wärmeenergie über Zeit)
-```
-
-Je mehr wir das Netz ausbauen:
-- **Mehr Leitungslänge** → mehr Widerstand R im System
-- **Mehr Transformatoren** → mehr Schaltverluste
-- **Mehr Datenzentren** → höhere lokale Wärmedichte
-- **Mehr Elektrofahrzeuge** → mehr Ladevorgänge, mehr I²R
-
-Die Rechnung: `mehr Infrastruktur × gleiches Ohmsche Gesetz = mehr Wärme direkt am Boden`
-
-### 3. Die elektromagnetische Kopplung (Trafo-Effekt)
-
-Jeder Transformator und jede stromführende Leitung strahlt Energie ab:
-- Magnetfelder induzieren Wirbelströme in der Umgebung
-- Die Erde als System verhält sich wie ein großer Transformator
-- Die zunehmende Frequenz und Dichte der Technologie erhöht die Kopplungsverluste
-
-**Hotspots auf Wärmekarten** (z.B. Küstenregionen Kaliforniens, urbane Zentren) korrelieren mit der Dichte der elektrischen Infrastruktur – das ist eine **Messgröße, keine Theorie**.
-
----
-
-## Das Modell: Input → Prozess → Output
-
-```
-INPUT:   Weltweit eingespeiste elektrische Energie [TWh/Jahr]
-          (fossil + erneuerbar – die Quelle spielt physikalisch keine Rolle)
-            |
-PROZESS: Transport durch ~80 Millionen km Kabel
-          + ~1 Milliarde Transformatoren weltweit
-          + Transportverluste: ~8–15% des erzeugten Stroms
-          + Endnutzungsverluste: weitere ~20–40%
-            |
-OUTPUT:  Q = I² · R · t  →  Wärmeabstrahlung direkt an Erdoberfläche [EJ/Jahr]
-```
-
-Das Python-Modell (`euler_heat_model.py`) berechnet diese Wärmemengen quantitativ.
-
----
-
-## Warum das nicht widerlegbar ist
-
-Ein Physiker könnte einwenden: *"Der Anteil ist klein im Vergleich zum Treibhauseffekt."*
-
-Die Antwort:
-
-1. **Er ist additiv** – er addiert sich auf CO₂-Effekte, er ersetzt sie nicht
-2. **Er ist lokal massiv** – Urban Heat Islands entstehen genau dort, wo Infrastrukturdichte am höchsten ist
-3. **Er wächst exponentiell** – mit jedem neuen Rechenzentrum, jeder neuen Ladestation, jedem neuen Windpark-Kabel
-4. **CO₂ hält Wärme fest** – aber I²R *erzeugt neue Wärme aktiv*, direkt am Boden
-
-> **Serverraum-Analogie:** Wenn der Serverraum zu heiß wird, hilft es nichts, die Software zu optimieren (CO₂-Steuer), wenn die Hardware (das globale Netz) einfach zu viel Strom zieht und die Kühlung (die Natur) nicht hinterherkommt.
-
----
-
-## Die Orts-Entropie-Asymmetrie: Warum "erneuerbar" kein Nullsummenspiel ist
-
-> **These (Raiko Pulvermacher):** Wir entziehen lokal kinetische Energie (z. B. dem Wind der Nordsee), die aber global ist – während wir lokal Wärme erzeugen **und** global für Erhitzung sorgen, weil der Wind nicht nur die Umwandlungsenergie lokal aufnimmt, sondern die neue Leitung global wirkt.
-
-Das klassische Gegenargument lautet: "Windenergie ist ein Nullsummenspiel – wir entziehen der Atmosphäre kinetische Energie und geben sie an anderer Stelle als Wärme zurück." Diese Argumentation scheitert in drei Punkten:
-
-### 1. Ortsverschiebung (Spatial Decoupling)
-
-| Ort | Vorgang | Thermische Wirkung |
-|---|---|---|
-| Nordsee / Küste | Windturbine entzieht Strömungsenergie | Lokal: Abkühlung der Strömung |
-| Tausende km Leitung | I²·R entlang Kupfer/Aluminium | Wärme in thermisch belasteten Zwischenregionen |
-| Megacity / Datenzentrum | Endnutzung + Restwiderstände | Wärme genau dort, wo Urban Heat Island schon existiert |
-
-Die Energie wird an einem thermisch neutralen Ort entnommen und an einem thermisch kritischen Ort emittiert.  
-Das ist keine Umverteilung – das ist **aktive Umverteilung in Problemzonen**.
-
-### 2. Die Leitung als planetarer Heizstab
-
-Das Kabel selbst ist kein passiver Kanal – es ist ein gestreckte Wärmequelle:
-
-```
-P_Leitung = I² · R_gesamt   mit   R_gesamt = ρ · L / A
-```
-
-- `L` = Leitungslänge  
-- `ρ` = spezifischer Widerstand des Leitermaterials  
-- `A` = Querschnittsfläche  
-
-Je weiter die Energie transportiert wird (globaler Netzausbau = größeres `L`), desto höher ist `R_gesamt`, desto mehr Joulesche Wärme entsteht **entlang der gesamten Strecke** – nicht nur am Zielort.  
-**Die "grüne" Lösung von heute (massiver Netzausbau) ist physikalisch der Einbau eines weltumspannenden Tauchsieders.**
-
-### 3. Die Entropie-Falle (Entropy Trap)
-
-Windenergie ist **geordnete, niederentropische Energie** (gerichtete Luftbewegung).  
-Joulesche Wärme durch Leitungswiderstand ist **ungeordnete, hochentropische Energie** (thermische Agitation).
-
-```
-S_Wind (niedrig) → Leitungstransport → S_Abwärme (hoch)
-```
-
-Dieser Prozess ist **irreversibel** (Zweiter Hauptsatz). Wir beschleunigen den Wärmetod des Systems Erde nicht durch die Quelle, sondern durch die schiere Länge und Komplexität der Netzinfrastruktur.  
-CO₂-Modelle erfassen diesen Entropie-Anstieg durch Infrastruktur nicht – die Globale Euler-Widerstand-Erhitzung schon.
-
-### Zusammenfassung der Asymmetrie
-
-```
-KLASSISCHES BILD:   Entnahme(Wind) ←→ Abgabe(Wärme)  =  Nullsumme ✗
-                     (gleicher Ort, gleiche Thermodynamik)
-
-REALES BILD:        Entnahme(Nordsee, thermisch neutral)
-                         ↓  80 Mio. km Kabel  →  I²·R  →  Wärme auf Strecke
-                    Abgabe(Megacity, thermisch kritisch)   ≠  Nullsumme ✓
-                         +  Entropieerhöhung (irreversibel)
-                         +  Urban Heat Island Verstärkung
-```
-
-Das Modell (`euler_heat_model.py`) enthält jetzt eine explizite Leitungslängen-Analyse, die diesen Effekt quantifiziert.
-
----
-
-## FN-Zeitlogik: Asymmetrie als Treiber
-
-Das Fibonacci-Paritätsmuster (`UUG` – Ungerade, Ungerade, Gerade) zeigt: Asymmetrie ist der Normalzustand von Prozessen.  
-**Asymmetrie + Asymmetrie = Symmetrie (G)** – aber diese Symmetrie ist sofort wieder Startpunkt des nächsten Prozesses.  
-Das ist **Zeitlogik**: Ein System in Symmetrie ist nicht in Ruhe – es ist bereits energetisch unterwegs zum nächsten Zustand.  
-Globale Wärmeentwicklung durch I²R folgt genau diesem Muster: kein Equilibrium, immer additiv, immer weiter.
-
----
-
-## Ausführen des Modells
+Westliche Industrienationen (USA, EU, Japan u. a.) repräsentieren ~15 % der Weltbevölkerung, verursachen aber schätzungsweise **>50 % dieser globalen Infrastruktur-Abwärme**.
 
 ```bash
-python euler_heat_model.py
+python euler_heat_model.py    # Modell ausführen
 ```
-
-Ausgabe: Berechnete globale Joule-Wärme in EJ/Jahr, Vergleich mit anderen Wärmequellen, lokale Wärmedichte.
 
 ---
 
-## Forschungskontext und Verzweigung
+## 🌐 Globaler Aufruf
 
-Diese Arbeit ist **kein isoliertes Projekt**. Sie ist eine direkte Verzweigung aus dem Forschungsbaum von Raiko Pulvermacher und baut auf folgenden Vorarbeiten auf:
+> **Alle Länder der Erde sind dringend aufgerufen, aktiv an der Ablösung der Euler-basierten Energieinfrastruktur zu arbeiten und auf die Fn-Logik umzusteigen.**
+
+Das Euler-Netz heizt die Erde — nicht weil die Energie schmutzig ist, sondern weil die **Topologie falsch ist**. `P = I² · R` gilt in jedem Land, für jeden Strom, durch jede Leitung. Die Lösung ist strukturell: kürzere Wege, lokale Erzeugung, Fn-Logik.
+
+→ **[Vollständiger Übergangs-Aufruf und Empfehlungen für alle Länder](docs/08_fn_uebergang.md)**
+
+---
+
+## Dokumentenstruktur
+
+| Dokument | Inhalt |
+|---|---|
+| [📄 Abstract](docs/01_abstract.md) | Wissenschaftlicher Abstract (Deutsch + Englisch) |
+| [🔬 Physikalische Grundlagen](docs/02_physikalische_grundlagen.md) | Die drei physikalischen Beweise (2. HS, I²R, EM-Kopplung) |
+| [📊 Quantitatives Modell](docs/03_modell.md) | Modellannahmen, Ergebnisse, Leitungslängen-Analyse |
+| [🌍 Orts-Entropie-Asymmetrie](docs/04_orts_entropie_asymmetrie.md) | Warum „erneuerbar" kein Nullsummenspiel ist |
+| [🛰️ Satellitenbeweise](docs/05_satellitenbeweise.md) | Saisonale Hitzemessung (Frühling/Sommer/Herbst/Winter) + westliche Verursachung |
+| [∿ FN-Zeitlogik](docs/06_fn_zeitlogik.md) | Fibonacci-Paritätsmuster als Modell irreversibler Prozesse |
+| [🌐 Globaler Übergang: Euler → Fn](docs/08_fn_uebergang.md) | Aufruf und konkrete Empfehlungen für alle Länder |
+| [📚 Quellen](docs/07_quellen.md) | Vollständiges Literatur- und Datenquellenverzeichnis |
+
+---
+
+## Forschungsbaum
 
 ```
-Tensor der Realitäten (TdR)  ←  Hauptwerk / Fundament
-│
-│   Bottom-Up-Naturbeschreibung: Energie, Zeit, Materie, Gravitation
-│   als untrennbar gekoppeltes Ganzes. Keine Durchschnittsmodelle.
+Tensor der Realitäten (TdR)
 │   DOI: https://doi.org/10.5281/zenodo.18727529
-│   GitHub: https://github.com/RaikoPulvermacher/Tensor-Realit-ten
 │
-└──► Energie-Revolution  ←  Direkte Vorgängerarbeit
+└──► Energie-Revolution
+│   DOI: https://doi.org/10.5281/zenodo.18778354
+│
+└──► Diese Arbeit: Globale Euler-Widerstand-Erhitzung
      │
-     │   Euler-Mathematik auf diskrete Systeme angewandt erzeugt
-     │   89% Verluste als Abwärme. Fn-Prozessstruktur als Lösung.
-     │   DOI: https://doi.org/10.5281/zenodo.18778354
-     │   GitHub: https://github.com/RaikoPulvermacher/Energie-Revolution-/tree/v1.0
-     │
-     └──► Diese Arbeit: Globale Euler-Widerstand-Erhitzung
-          │
-          │   Messbarer Ausdruck des Problems: Das Euler-Netzwerk
-          │   (I²·R) als globale, additive Wärmequelle. P = I²·R ist
-          │   nicht nur eine Formel – es ist ein planetares Phänomen.
-          │
-          └──► Nächste Schritte: Fn-Logik als Lösung
-               DOI: https://doi.org/10.5281/zenodo.19100374
-               GitHub: https://github.com/RaikoPulvermacher/Fn-Logik-Mathematik
-               GitHub: https://github.com/RaikoPulvermacher/Energie-Revolution-
+     └──► Fn-Logik als Lösung
+          DOI: https://doi.org/10.5281/zenodo.19100374
 ```
-
-**Der rote Faden:**  
-TdR erkennt, dass die Natur additiv und nicht separierbar ist →  
-Energie-Revolution zeigt, dass Euler-Mathematik auf diskrete Systeme Verluste erzeugt →  
-Diese Arbeit quantifiziert genau diese Verluste als globale Abwärme (I²·R) →  
-Die Fn-Logik zeigt den Ausweg.
 
 ---
 
@@ -210,14 +65,4 @@ Die Fn-Logik zeigt den Ausweg.
 
 Dieses Werk steht unter der **Pulvermacher Open Research License (PORL) v1.0**.  
 GitHub: https://github.com/RaikoPulvermacher/PORL/tree/v.1.0  
-Siehe [`LICENSE`](LICENSE) für den vollständigen Lizenztext.
-
----
-
-## Quellen und Grundlagen
-
-- Euler, L. (1736): *Solutio problematis ad geometriam situs pertinentis* – Netzwerktheorie
-- Joule, J.P. (1841): *On the Heat evolved by Metallic Conductors of Electricity* – P = I²R
-- IEA World Energy Outlook (jährlich): Globale Stromproduktion und Transportverluste
-- Oke, T.R. (1982): *The energetic basis of the urban heat island* – lokale Wärmequellen
-- Flanner, M.G. (2009): *Integrating anthropogenic heat flux with global climate models* – globale anthropogene Wärme ~0.028 W/m²
+Vollständiger Lizenztext: [`LICENSE`](LICENSE)
