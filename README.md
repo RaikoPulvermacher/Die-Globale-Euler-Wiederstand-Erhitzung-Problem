@@ -132,6 +132,7 @@ Tensor der Realitäten (TdR)  ←  Hauptwerk / Fundament
           │   nicht nur eine Formel – es ist ein planetares Phänomen.
           │
           └──► Nächste Schritte: Fn-Logik als Lösung
+               DOI: https://doi.org/10.5281/zenodo.19100374
                GitHub: https://github.com/RaikoPulvermacher/Fn-Logik-Mathematik
                GitHub: https://github.com/RaikoPulvermacher/Energie-Revolution-
 ```
@@ -147,7 +148,6 @@ Die Fn-Logik zeigt den Ausweg.
 ## Lizenz / License
 
 Dieses Werk steht unter der **Pulvermacher Open Research License (PORL) v1.0**.  
-Zenodo: https://doi.org/10.5281/zenodo.19100374  
 GitHub: https://github.com/RaikoPulvermacher/PORL/tree/v.1.0  
 Siehe [`LICENSE`](LICENSE) für den vollständigen Lizenztext.
 
