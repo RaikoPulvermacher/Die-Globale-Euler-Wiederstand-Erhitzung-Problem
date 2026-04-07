@@ -59,6 +59,94 @@ def TWh_zu_EJ(TWh: float) -> float:
     return TWh * 3.6e-3
 
 
+def ausgabe_spezifische_leitungslaenge(laenge_km: float,
+                                        strom_A: float = 1_000,
+                                        querschnitt_mm2: float = 240) -> dict:
+    """
+    Modellausgabe für eine spezifische Leitungslänge.
+
+    Gibt Widerstand, Verlustleistung und Energieverlust pro Jahr zurück.
+
+    Parameters
+    ----------
+    laenge_km       : Leitungslänge in Kilometern
+    strom_A         : Nennstrom in Ampere (Standard: 1000 A / 380-kV-Leitung)
+    querschnitt_mm2 : Leiterquerschnitt in mm² (Standard: 240 mm²)
+    """
+    rho_kupfer = 1.72e-8            # spez. Widerstand Kupfer [Ω·m]
+    laenge_m = laenge_km * 1_000
+    querschnitt_m2 = querschnitt_mm2 * 1e-6
+
+    R_ohm = rho_kupfer * laenge_m / querschnitt_m2
+    P_verlust_W = strom_A ** 2 * R_ohm
+    P_verlust_MW = P_verlust_W / 1e6
+    energie_verlust_TWh_pro_jahr = (P_verlust_W * SECONDS_PER_YEAR) / TWh_TO_JOULE
+
+    return {
+        "laenge_km": laenge_km,
+        "R_ohm": R_ohm,
+        "P_verlust_MW": P_verlust_MW,
+        "energie_verlust_TWh_pro_jahr": energie_verlust_TWh_pro_jahr,
+    }
+
+
+def grad_pro_TWh_ballungsraum(flaeche_km2: float = 900,
+                               grenzschicht_m: float = 1_500,
+                               verlustrate: float = None,
+                               stadt_name: str = "Typische Großstadt") -> dict:
+    """
+    Berechnet die Temperaturerhöhung in einem Ballungsraum
+    pro Terawattstunde elektrischen Durchflusses.
+
+    Zwei Ansätze:
+    1. Adiabatisch  – theoretisches Maximum (keine Wärmeabgabe nach außen).
+    2. Strahlungsgleichgewicht – realistischer Langzeitwert über die
+       lokale Klimasensitivität (ΔT ≈ ΔF / λ, λ ≈ 0.8 °C per W/m²).
+
+    Parameters
+    ----------
+    flaeche_km2     : Fläche des Ballungsraums in km² (Standard 900 km²)
+    grenzschicht_m  : Höhe der urbanen Grenzschicht in m  (Standard 1500 m)
+    verlustrate     : Gesamtanteil der Energie, der als Joule-Wärme lokal
+                      deponiert wird (Standard: Transport + Endnutzung kombiniert)
+    stadt_name      : Bezeichnung des Szenarios
+    """
+    if verlustrate is None:
+        verlustrate = TRANSMISSION_LOSS_FRACTION + END_USE_LOSS_FRACTION * (
+            1 - TRANSMISSION_LOSS_FRACTION
+        )
+
+    flaeche_m2 = flaeche_km2 * 1e6
+
+    # --- Thermische Masse der urbanen Luftsäule ---
+    rho_luft = 1.2          # kg/m³
+    cp_luft = 1_005         # J/(kg·K)
+    luftmasse_kg = flaeche_m2 * grenzschicht_m * rho_luft
+    waermekapazitaet_J_pro_K = luftmasse_kg * cp_luft
+
+    # --- Joule-Wärme pro 1 TWh Durchfluss ---
+    joulewaerme_J = 1 * TWh_TO_JOULE * verlustrate        # J
+
+    # --- Ansatz 1: Adiabatisch (Impuls-Wärme, kein Austausch) ---
+    delta_T_adiabatisch = joulewaerme_J / waermekapazitaet_J_pro_K
+
+    # --- Ansatz 2: Strahlungsgleichgewicht (kontinuierlich, 1 TWh/Jahr) ---
+    leistung_W = joulewaerme_J / SECONDS_PER_YEAR          # W (Durchschnitt über 1 Jahr)
+    flussdichte_W_m2 = leistung_W / flaeche_m2
+    lambda_lokal = 0.8      # °C per W/m²  (lokale Klimasensitivität, urban)
+    delta_T_gleichgewicht = flussdichte_W_m2 * lambda_lokal
+
+    return {
+        "stadt_name": stadt_name,
+        "flaeche_km2": flaeche_km2,
+        "verlustrate_pct": verlustrate * 100,
+        "joulewaerme_TWh_pro_TWh": joulewaerme_J / TWh_TO_JOULE,
+        "flussdichte_W_m2": flussdichte_W_m2,
+        "delta_T_adiabatisch_K": delta_T_adiabatisch,
+        "delta_T_gleichgewicht_K": delta_T_gleichgewicht,
+    }
+
+
 def watt_pro_m2(energie_TWh: float) -> float:
     """Mittlere Wärmeflussdichte über die gesamte Erdoberfläche in W/m²."""
     energie_J = energie_TWh * TWh_TO_JOULE
@@ -218,6 +306,55 @@ def hauptrechnung():
     print("    Kein Gleichgewicht, immer additiv, kein Ruhemodus.")
     print()
     print("  Das ist Zeitlogik. Das ist Euler. Das ist Physik.")
+    print("=" * 60)
+
+    # --- Gemini-Frage 1: Ausgabe für eine spezifische Leitungslänge ---
+    print()
+    print("=" * 60)
+    print("GEMINI-FRAGE 1: MODELLAUSGABE FÜR EINE SPEZIFISCHE LEITUNGSLÄNGE")
+    print("=" * 60)
+    beispiel_km = 500
+    ergebnis = ausgabe_spezifische_leitungslaenge(beispiel_km)
+    print(f"  Leitungslänge:         {ergebnis['laenge_km']:>10,.0f} km")
+    print(f"  Widerstand R:          {ergebnis['R_ohm']:>10.2f} Ω")
+    print(f"  Verlustleistung P=I²R: {ergebnis['P_verlust_MW']:>10.3f} MW")
+    print(f"  Joule-Energie/Jahr:    {ergebnis['energie_verlust_TWh_pro_jahr']:>10.4f} TWh/Jahr")
+    print()
+    print("  (Annahme: I = 1000 A, Querschnitt = 240 mm², Kupfer)")
+    print()
+
+    # --- Gemini-Frage 2: °C pro TWh in einem Ballungsraum ---
+    print("=" * 60)
+    print("GEMINI-FRAGE 2: TEMPERATURERHÖHUNG PRO TWh IN EINEM BALLUNGSRAUM")
+    print("=" * 60)
+    staedte = [
+        ("Kleinstadt   (~100 km²)",  100, 1_000),
+        ("Großstadt    (~500 km²)",  500, 1_500),
+        ("Metropolraum (~900 km²)",  900, 1_500),
+        ("Megacity    (~2000 km²)", 2_000, 2_000),
+    ]
+    print(f"  {'Szenario':<30}  {'Verlust':>8}  {'Flux W/m²':>10}  "
+          f"{'ΔT adiab. [K]':>14}  {'ΔT Gleichgew. [K]':>18}")
+    print(f"  {'-'*30}  {'-'*8}  {'-'*10}  {'-'*14}  {'-'*18}")
+    for name, flaeche, grenzschicht in staedte:
+        r = grad_pro_TWh_ballungsraum(flaeche_km2=flaeche,
+                                       grenzschicht_m=grenzschicht,
+                                       stadt_name=name)
+        print(f"  {name:<30}  {r['verlustrate_pct']:>7.1f}%  "
+              f"{r['flussdichte_W_m2']:>10.5f}  "
+              f"{r['delta_T_adiabatisch_K']:>14.4f}  "
+              f"{r['delta_T_gleichgewicht_K']:>18.6f}")
+    print()
+    print("  Erklärung der zwei Ansätze:")
+    print("  • ΔT adiabatisch   = theoretisches Maximum (1 TWh in die Luftsäule,")
+    print("                       keine Wärmeabgabe nach außen)")
+    print("  • ΔT Gleichgewicht = realistischer Langzeitwert (1 TWh/Jahr kontinuierlich,")
+    print("                       Strahlungsgleichgewicht: ΔT = Flux / 0.8 °C·m²/W)")
+    print()
+    print("  → Pro TWh Durchfluss hebt Joule-Wärme die Temperatur im Gleichgewicht")
+    r_ref = grad_pro_TWh_ballungsraum(flaeche_km2=900, grenzschicht_m=1_500)
+    print(f"    um ~{r_ref['delta_T_gleichgewicht_K']*1000:.3f} mK (Metropolraum 900 km²)")
+    print(f"    oder adiabatisch um ~{r_ref['delta_T_adiabatisch_K']:.2f} K an.")
     print("=" * 60)
 
 
